@@ -26,25 +26,41 @@ def home():
 
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    form = menu1()
-    number = [
-        '1.Cheeseburger','2.Rice','3.Doge','4.Indo Coca Cola','5.Waifu'
-    ]
-    itemdes = [
-        'Cheap Ass Burger', 'If you are Asian, get this', 'Animal abuse? Call PETA!', 'Limited time Coca Cola from Indo!',
-        'Nier Automata 2B'
-    ]
-    price = [
-        1.00,2.00, 100.00, 3.00, 500.00
-    ]
+
+    form0 = menu1(prefix='form0')
+    form1 = menu1(prefix='form1')
+    form2 = menu1(prefix='form2')
+
+    list = [form0,form1,form2]
+
+    # number = [
+    #     '1.Cheeseburger','2.Rice','3.Doge','4.Indo Coca Cola','5.Waifu'
+    # ]
+    # itemdes = [
+    #     'Cheap Ass Burger', 'If you are Asian, get this', 'Animal abuse? Call PETA!', 'Limited time Coca Cola from Indo!',
+    #     'Nier Automata 2B'
+    # ]
+    # price = [
+    #     1.00,2.00, 100.00, 3.00, 500.00
+    # ]
     total = [0]
 
-    if form.validate_on_submit():
+    validate = True
+    for i in list:
+        validate = validate and i.validate_on_submit()
+    #if (list[0].validate_on_submit() and list[0].qty.data and list[1].validate_on_submit() and list[1].qty.data and list[2].validate_on_submit() and list[2].qty.data):
+    # if form2.validate_on_submit():
+    if validate:
+        print(form0.qty.data)
+        print(form1.qty.data)
+        print(form2.qty.data)
 
-        return render_template("checkout.html", total=total)
-    return render_template("menu.html", form=form,
-                           total=total, number=number, itemdes=itemdes, price=price, iterr=zip(number,itemdes,price),
-                           databaseitems = Menu.query.all())
+        return '<h1>' + str(list[0].qty.data) + ' ' + str(list[1].qty.data) + ' '+ str(list[2].qty.data) + '</h1>'
+        #return redirect(url_for('contact'))
+        # return render_template("checkout.html", total=total)
+    return render_template("menu.html", formlist=list, fooditems = FoodItems.query.all())
+                           # total=total, number=number, itemdes=itemdes, price=price, iterr=zip(number,itemdes,price),
+                           # databaseitems = Menu.query.all())
 
 @app.route('/checkout')
 def check():

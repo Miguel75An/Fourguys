@@ -43,6 +43,13 @@ class Menu(db.Model):
 
     emplRel = db.relationship('Employee', backref='menuRel')
 
+class FoodItems(db.Model):
+    __tablename__ = 'fooditems'
+    itemName = db.Column(db.String(50), primary_key=True)
+    itemDescr = db.Column(db.Text)
+    itemPrice = db.Column(db.Integer)
+    itemPict = db.Column(db.String(50))
+
 class Order(db.Model):
     __tablename__ = 'orders'
     orderID = db.Column(db.Integer, primary_key=True)

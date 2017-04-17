@@ -3,7 +3,25 @@
 {% block title %}
 menus
 {% endblock %}
-
+ <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allerta+Stencil" />
+    <!--<link rel="preconnect" type="text/css" href="//fonts.googleapis.com/css?family=Allerta+Stencil" /> -->
+    <style>
+    /*Fixed size web page with light green background */
+    body {
+        width: 1054px;
+        height: 1054px;
+        background-color: springgreen;
+    }
+    /*Modified fonts for h2 and h3*/
+    h2,h3,p {
+        font-family: "Allerta Stencil";
+        font-size: 24px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 500;
+        line-height: 15.4px;
+    }
+    </style>
 {% block content %}
     <ul class="list-inline">
   <li><a href="/">Home</a></li>
@@ -27,20 +45,52 @@ menus
     <br>
     <br>
     </ul>
+{#    ==============================================#}
+
+    <div style="float: left" >
     <div class="container-fluid">
-    <div class="row">
-    {% for items in databaseitems%}
+{#    <div class="row">#}
+    <form class="form-signin" method="post">
+    {% for items in fooditems%}
         <div class="col-md-4">
-            <p>{{ items.itemname }}</p>
-            <p>Price:${{ items.price }}.00</p>
-            <p>{{ items.itemdes }}</p>
-            {{ wtf.form_field(form.qty)}}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Add to cart</button>
+{#            {{ form.hidden_tag() }}#}
+            <p style="background-color: aqua; font-family: 'Allerta Stencil' ">Food: {{ items.itemName }}</p>
+            <p style="background-color: #00ff80">Description: {{ items.itemDescr }}</p>
+            <p style="background-color: gold">Price: ${{ items.itemPrice }}</p>
+            <img src="static/{{ items.itemPict }}">
+{#            {{ wtf.form_field(form.qty)}}#}
+{#        <button class="btn btn-lg btn-primary btn-block" type="submit">Add to cart</button>#}
         </div>
     {% endfor %}
+
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+    {{ formlist[0].hidden_tag() }}
+    {{ wtf.form_field(formlist[0].qty)}}
+        </div>
+        <div class="col-md-4">
+    {{ formlist[1].hidden_tag() }}
+    {{ wtf.form_field(formlist[1].qty)}}
+        </div>
+        <div class="col-md-4">
+    {{ formlist[2].hidden_tag() }}
+    {{ wtf.form_field(formlist[2].qty)}}
+        </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Checkout</button>
     </div>
+
     </div>
+
+    </form>
+{#    </div>#}
+    </div>
+
     <br>
-    <h1> Shopping Cart</h1>
+    </div>
+    <div class="col-md-4" style="float: right;">
+    <h1 style="background-color: #00ff80; font-family: 'Ubuntu', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif"> Shopping Cart</h1>
+    </div>
+
 
 {% endblock %}

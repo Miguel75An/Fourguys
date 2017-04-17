@@ -23,6 +23,7 @@ def rebuild_database():
     dummy_files = [
         { 'model': Menu, 'file': 'menuitems.csv' },
         { 'model': Customer, 'file': 'users.csv' },
+        { 'model': FoodItems, 'file': 'fooditems.csv'},
         { 'model': EmployeeType, 'file': 'emplTypes.csv' },
     ]
     for thing in dummy_files:

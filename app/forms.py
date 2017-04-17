@@ -18,3 +18,4 @@ class login1(FlaskForm):
 
 class menu1(FlaskForm):
     qty = IntegerField('qty', validators=[InputRequired()], default=0)
+
